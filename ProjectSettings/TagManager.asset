@@ -2,8 +2,9 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
-  tags: []
+  serializedVersion: 3
+  tags:
+  - Unit
   layers:
   - Default
   - TransparentFX
@@ -11,11 +12,11 @@ TagManager:
   - 
   - Water
   - UI
+  - Units
+  - UIIcons
   - 
   - 
-  - 
-  - 
-  - 
+  - AboveTilemap
   - 
   - 
   - 
@@ -41,3 +42,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3618598679
+    locked: 0
+  - name: Middleground
+    uniqueID: 4018853981
+    locked: 0
+  - name: Selectable
+    uniqueID: 573493581
+    locked: 0
+  - name: Foreground
+    uniqueID: 2909279761
+    locked: 0
+  m_RenderingLayers:
+  - Default
