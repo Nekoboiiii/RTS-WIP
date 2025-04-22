@@ -50,8 +50,6 @@ public class Building : MonoBehaviour
 
     public void TrySpawnUnit(UnitScriptableObject unit)
     {
-        Debug.Log($"Trying to spawn: {unit.unitName}");
-
     if (ResourceManager.Instance == null)
     {
         Debug.LogError("ResourceManager.Instance is null!");
@@ -73,7 +71,6 @@ public class Building : MonoBehaviour
         Vector3 spawnPos = transform.position + Vector3.right * 1.5f;
         Instantiate(unit.prefab, spawnPos, Quaternion.identity);
         ResourceManager.Instance.SpendResources(unit);
-        Debug.Log("Spawned: " + unit.unitName);
     }
 
     void SpawnUnit(UnitScriptableObject unit)

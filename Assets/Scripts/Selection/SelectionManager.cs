@@ -1,13 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+
+[Obsolete("Use the new Selection Scripts")]
 
 public class SelectionManager : MonoBehaviour
 {
     public LayerMask selectableLayer;
     private Vector2 startPos;
     private bool isSelecting = false;
+    private bool hasBuilding = false;
     public RadialMenu radialMenu;
     public List<Selectable> selectedObjects = new();
     private float moveCommandTimer = 0f;
@@ -32,13 +36,11 @@ public class SelectionManager : MonoBehaviour
             if (Vector2.Distance(startPos, endPos) < clickThreshold)
             {
                 // Single click select, passing the isMultiSelect value to handle multi-selection
-                Debug.Log("Single click select");
                 TrySingleClickSelect(isMultiSelect);
             }
             else
             {
                 // Drag box selection
-                Debug.Log("Drag box selection");
                 SelectObjectsInDragArea();
             }
         }
@@ -61,7 +63,7 @@ public class SelectionManager : MonoBehaviour
     {
         var viewportBounds = Utils.GetViewportBounds(Camera.main, startPos, Input.mousePosition);
         bool foundSomething = false;
-        bool hasBuilding = false;
+        
 
         List<Selectable> objectsToSelect = new List<Selectable>();
 
@@ -101,46 +103,43 @@ public class SelectionManager : MonoBehaviour
     }
 
     void TrySingleClickSelect(bool isMultiSelect)
-{
-    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-    if (Physics.Raycast(ray, out RaycastHit hit, 1000f))
     {
-        var selectable = hit.collider.GetComponent<Selectable>();
-        if (selectable != null)
+        Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Collider2D hit = Physics2D.OverlapPoint(mouseWorldPos);
+        if (hit != null)
         {
-            if (!isMultiSelect)
+            Selectable selectable = hit.GetComponent<Selectable>();
+            if (selectable != null)
             {
-                // Single selection: Deselect all first, then select the clicked object
-                Debug.Log($"Selected: {selectable.name} CODE START");
-                DeselectAll();
-                SelectObject(selectable);
-            }
-            else
-            {
-                // Multi-selection (Shift/Ctrl pressed): Toggle the selection
-                if (selectedObjects.Contains(selectable))
+                if (!isMultiSelect)
                 {
-                    // If already selected, deselect it
-                    Debug.Log($"Deselected: {selectable.name}");
-                    selectable.Deselect();
-                    selectedObjects.Remove(selectable);
+                    // Single selection: Deselect all first, then select the clicked object
+                    DeselectAll();
+                    SelectObject(selectable);
                 }
                 else
                 {
-                    // Otherwise, select it
-                    Debug.Log($"Selected: {selectable.name} CODE END");
-                    SelectObject(selectable);
+                    // Multi-selection (Shift/Ctrl pressed): Toggle the selection
+                    if (selectedObjects.Contains(selectable))
+                    {
+                        // If already selected, deselect it
+                        selectable.Deselect();
+                        selectedObjects.Remove(selectable);
+                    }
+                    else
+                    {
+                        // Otherwise, select it
+                        SelectObject(selectable);
+                    }
                 }
             }
         }
+        else
+        {
+            // Deselect all if clicking on an empty area (nothing hit)
+            DeselectAll();
+        }
     }
-    else
-    {
-        // Deselect all if clicking on an empty area (nothing hit)
-        Debug.Log("Clicked on empty space, deselecting all.");
-        DeselectAll();
-    }
-}
 
 
 
@@ -195,7 +194,23 @@ public class SelectionManager : MonoBehaviour
 
         if (building.buildingData != null && building.buildingData.spawnableUnits != null)
         {
-            RadialMenu.Instance.PopulateMenu(building.buildingData.spawnableUnits.ToArray(), building);
+            // Convert UnitScriptableObject[] to List<RadialMenuEntry>
+            List<RadialMenuEntry> entries = new();
+
+            foreach (var unit in building.buildingData.spawnableUnits)
+            {
+                if (unit == null) continue;
+
+                // Create a new instance of RadialMenuEntry
+                RadialMenuEntry entry = ScriptableObject.CreateInstance<RadialMenuEntry>();
+                entry.unitToSpawn = unit;
+                entry.onClickFallback = null; // No fallback needed since we want to spawn units
+                entry.icon = unit.icon; 
+
+                entries.Add(entry);
+            }
+
+            RadialMenu.Instance.PopulateMenu(entries.ToArray(), building);
         }
         else
         {
@@ -203,17 +218,38 @@ public class SelectionManager : MonoBehaviour
         }
     }
 
+
     public void DeselectAll()
     {
+        bool hasBuildingSelected = false;
+
+        // Safety check to ensure RadialMenu is not null and is active before calling Cancel       
+        if (RadialMenu.Instance != null && RadialMenu.Instance.gameObject.activeInHierarchy)
+        {
+            RadialMenu.Instance.Cancel(); 
+        }
+
+        // Check if any selected object is building
+        foreach (var obj in selectedObjects)
+        {
+            if (obj.building != null)
+            {
+                hasBuildingSelected = true;
+                break;
+            }
+        }
+
+        // Cancel RadialMenu Animation
+        if(hasBuildingSelected && RadialMenu.Instance != null)
+        {
+            RadialMenu.Instance.Cancel();
+        }
+
+        // Deselect all selected objects
         foreach (var obj in selectedObjects)
         {
             obj.Deselect();
         }
         selectedObjects.Clear();
-
-        if (RadialMenu.Instance != null && RadialMenu.Instance.gameObject.activeInHierarchy)
-        {
-            RadialMenu.Instance.Hide();
-        }
     }
 }

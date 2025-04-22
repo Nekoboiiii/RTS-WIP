@@ -40,7 +40,6 @@ public class Worker : MonoBehaviour
         }
     }
 
-    // 👉 Diese Methoden brauchst du für Methode 3:
     public void SetTargetResourceNode(ResourceNode node)
     {
         targetResourceNode = node;

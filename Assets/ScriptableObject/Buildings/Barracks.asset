@@ -40,3 +40,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 46bfcaaa71fba9b41b966d3843465c89, type: 2}
   - {fileID: 11400000, guid: 43a4d23d3e5a9184a956e195fcb07039, type: 2}
   - {fileID: 11400000, guid: dd8ab34060bb9cc47a7aaaeb289fd30a, type: 2}
+  radialMenuEntries:
+  - {fileID: 11400000, guid: 3c375f656ddca504a983f62ce9cd462a, type: 2}
+  - {fileID: 11400000, guid: c628d7ec2a69de74c88aef39a966dcbf, type: 2}
+  - {fileID: 11400000, guid: 453e710d3f4148d44bdfe820922f8214, type: 2}
+  - {fileID: 11400000, guid: a679685a99a7e4d42b5bdacf8894a26b, type: 2}
+  - {fileID: 11400000, guid: 59be304ee192ab24e8768ebf18b03281, type: 2}
+  - {fileID: 11400000, guid: 282d9f3d810e5df47aeeaa56a4b04e97, type: 2}
+  - {fileID: 11400000, guid: ef15b926154b4c44b9cd7bdf335f2965, type: 2}
+  - {fileID: 11400000, guid: 00e3c57e07e4d724eb19ef4cc46a3783, type: 2}
+  - {fileID: 11400000, guid: f606d2b3718d05c4394fc6d187d233e3, type: 2}

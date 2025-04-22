@@ -34,14 +34,12 @@ public class CamerMovement: MonoBehaviour
         HandleZoom();
         HandleMouseDragMovement();
 
-        // 💨 Momentum after middle mouse drag
         if (momentum.magnitude > momentumThreshold)
         {
             targetPosition += momentum * Time.deltaTime;
             momentum = Vector3.Lerp(momentum, Vector3.zero, momentumDamping * Time.deltaTime);
         }
 
-        // 🎯 Final smooth camera movement
         transform.position = Vector3.Lerp(transform.position, targetPosition, 10f * Time.deltaTime);
     }
 

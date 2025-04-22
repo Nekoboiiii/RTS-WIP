@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -6627254041458044080}
   - component: {fileID: 3506817005569829578}
   - component: {fileID: -3920941304064811664}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Skelli 2
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -104,8 +104,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 5000
-  m_AngularDamping: 5000
+  m_LinearDamping: 1
+  m_AngularDamping: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:

@@ -34,6 +34,8 @@ public class BuildingScriptableObject : ScriptableObject
     // Ressource type to produce 
 
     [Header("Building Spawner")]
-    
     public List<UnitScriptableObject> spawnableUnits; // The prefab of the unit to spawn
+
+    [Header("Radial Menu Configuration")]
+    public List<RadialMenuEntry> radialMenuEntries;
 }

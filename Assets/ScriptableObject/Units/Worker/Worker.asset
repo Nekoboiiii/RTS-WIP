@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0908c1c88b8334b49b6b83d754b1e28e, type: 3}
   m_Name: Worker
   m_EditorClassIdentifier: 
-  icon: {fileID: 8749302817991680212, guid: bfee8eb9ff78685468632c565b1a999a, type: 3}
+  icon: {fileID: 21300000, guid: bfee8eb9ff78685468632c565b1a999a, type: 3}
   prefab: {fileID: 4619957419659130678, guid: 98bc167661638934cb6b31adfebed219, type: 3}
   unitName: Worker
   description: 

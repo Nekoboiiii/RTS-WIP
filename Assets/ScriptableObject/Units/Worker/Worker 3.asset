@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0908c1c88b8334b49b6b83d754b1e28e, type: 3}
-  m_Name: Worker 2
+  m_Name: Worker 3
   m_EditorClassIdentifier: 
-  icon: {fileID: 8749302817991680212, guid: bfee8eb9ff78685468632c565b1a999a, type: 3}
-  prefab: {fileID: 4619957419659130678, guid: e328aa189ceb26945943aa45062e72da, type: 3}
-  unitName: Worker 2
+  icon: {fileID: 21300000, guid: bfee8eb9ff78685468632c565b1a999a, type: 3}
+  prefab: {fileID: 4619957419659130678, guid: 7828b6716fca8334c8e5bb3969123e68, type: 3}
+  unitName: Worker 3
   description: 
-  maxHealth: 105
+  maxHealth: 130
   maxMana: 0
   maxArmor: 0
   meleeAttackDamage: 0
@@ -24,7 +24,7 @@ MonoBehaviour:
   rangedAttackDamage: 0
   rangedAttackRange: 0
   attackCooldown: 0
-  movementSpeed: 40
+  movementSpeed: 60
   spawnTime: 0
   spawnAmount: 0
   metalCost: 0
